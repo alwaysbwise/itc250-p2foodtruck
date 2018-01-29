@@ -1,6 +1,6 @@
 <?php
 
-require 'config_inc.php';
+require '../inc_0700/config_inc.php';
 include 'items.php';
 
 if(isset($_REQUEST['act']))
