@@ -1,8 +1,6 @@
 <?php
-
-require 'config_inc.php';
+require '../inc_0700/config_inc.php';
 include 'items.php';
-
 if(isset($_REQUEST['act']))
 {
   $myAction = (trim($_REQUEST['act']));
@@ -10,20 +8,16 @@ if(isset($_REQUEST['act']))
 {
   $myAction = "";
 }
-
 switch ($myAction){
   case "display":
     showData();
     break;
   default:
     showForm();
-
 }
-
 function showForm(){
   global $config;
   get_header();
-
   echo
 	'<script type="text/javascript" src="' . VIRTUAL_PATH . 'include/util.js"></script>
 	<script type="text/javascript">
@@ -34,17 +28,14 @@ function showForm(){
 		}
 	</script>
 	<h3 align="center">' . smartTitle() . '</h3>
-	<p align="center">Please Enter Quantities of Each It</p>
+	<p align="center">Please Enter Quantities of Each Item</p>
 	<form action="' . THIS_PAGE . '" method="post" onsubmit="return checkForm(this);">
              ';
-
-
 		foreach($config->items as $item)
-    {
-    echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
-
+        {
+        echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
+        //$_COOKIE['Price'] = $item->Price;
         }
-
     echo '
       <p>
         <input type="submit" value="Submit Quantities"><em>(<font color="red"><b>*</b> required field</font>)</em>
@@ -54,11 +45,18 @@ function showForm(){
     ';
     get_footer();
 }
-
 function showData(){
   get_header();
-
   echo '<h3 align="center">' . smartTitle() . '</h3>';
+    
+    function calculateTotal($value, $Price)
+{
+    $subTotal = (int)$value * (float)$Price;
+    $taxRate = $subTotal * .1;
+    $total = $taxRate + $subTotal;
+    return $total;
+}
+  
 
 	foreach($_POST as $name => $value)
     {
@@ -66,29 +64,20 @@ function showData(){
       {
       $name_array = explode('_',$name);
       $id = (int)$name_array[1];
-}
+      $Price = $item->$Price;
+      $total = calculateTotal($value, $Price);
+      echo "<p>You ordered $value of item number $id</p>";
+      }
+        
+    }
 
-}
-calculateTotal();
-echo "<p>You ordered $value of item number $id</p>";
 echo "<p>Your total is: $total</p>";
+    
+
 
 echo '<p align="center"><a href="' . THIS_PAGE . '">RESET</a></p>';
 get_footer(); #defaults to footer_inc.php
 
 
-function calculateTotal($value, $price, $id, $total){
-
-$subTotal = (int)$value * (int)$price;
-$taxRate = ($subTotal * 10.09) / 100;
-$total = $taxRate + $subTotal;
-
-
 }
-
-echo "<p>You ordered $value of item number $id</p>";
-echo "<p>Your total is: $total</p>";
-
-}
-
 ?>
