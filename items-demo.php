@@ -153,7 +153,7 @@ function showData()
 			
 			
             echo "<p>You ordered $value of item number $id</p>";
-            echo "<p>Your subtotal: $subtotal</p>";
+            //echo "<p>Your subtotal: $subtotal</p>";
             
             
         }
@@ -161,11 +161,11 @@ function showData()
         
 
     }
-/*    $tax = $subtotal*.1;
-    $total = $subtotal;
+    	$tax = $subtotal*.1;
+    	$total = $subtotal;
 	echo "<p>Subtotal: $subtotal</p>";
 	echo "<p>Tax: $tax</p>";    
-	echo "<p>Total: $total</p>";*/
+	echo "<p>Total: $total</p>";
 	
 	
 	
