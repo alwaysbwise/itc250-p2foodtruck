@@ -115,7 +115,7 @@ function getItem($id)
     
     foreach($config->items as $item)
     {
-       if($id == $item->ID;)
+       if($id == $item->ID)
        {
       return $item->Price;
        }
@@ -148,12 +148,12 @@ function showData()
             
             $thisItem = getItem($id);
             
-           // $subtotal = $thisItem * $value;
-            //$subtotal += $subtotal;
+            $subtotal = $thisItem * $value;
+            $subtotal += $subtotal;
 			
 			
             echo "<p>You ordered $value of item number $id</p>";
-            echo "<p>Your subtotal: $thisItem</p>";
+            echo "<p>Your subtotal: $subtotal</p>";
             
             
         }
