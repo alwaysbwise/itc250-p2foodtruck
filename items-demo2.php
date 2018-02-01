@@ -148,13 +148,13 @@ function showData()
 			//forcibly cast to an int in the process
             $id = (int)$name_array[1];
             
-          //if($value > 0)  {
+          if($value > 0)  {
             $thisItemPrice = getItem($id);
             $itemSubtotal = $thisItemPrice * $value;
             
 		    echo "<p>You ordered $value of item number $id at a price of $thisItemPrice</p>";	
             echo "<p>Your subtotal: $itemSubtotal</p>";
-         // }
+          }
             
         }//end if from form
         
