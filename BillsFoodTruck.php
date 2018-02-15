@@ -1,7 +1,6 @@
 <?php
 /**
- * item-demo2.php, based on demo_postback_nohtml.php is a single page web application that allows us to request and view 
- * a customer's name
+ * item-demo2.php, based on demo_postback_nohtml.php is a single page web application that allows us to take an order from a user and display the cost
  *
  * web applications.
  *
@@ -16,29 +15,16 @@
  * unique identifier for the next step of a multi-step process
  *
  * @package ITC281
- * @author Bill Newman <williamnewman@gmail.com>
- * @version 1.1 2011/10/11
- * @link http://www.newmanix.com/
+ * @author Bria Wise <brian.wise@alwaysbwise.com>
+ * @version 1.0 2018/01/31
+ * @link http://www.brianwise.xyz
  * @license http://opensource.org/licenses/osl-3.0.php Open Software License ("OSL") v. 3.0
- * @todo finish instruction sheet
- * @todo add more complicated checkbox & radio button examples
+ * @todo finish formatting
  */
 
 # '../' works for a sub-folder.  use './' for the root  
 require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
 include 'items.php'; 
-/*
-$config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
-$config->metaKeywords = 'SCCC,Seattle Central,ITC281,database,mysql,php';
-$config->metaRobots = 'no index, no follow';
-$config->loadhead = ''; #load page specific JS
-$config->banner = ''; #goes inside header
-$config->copyright = ''; #goes inside footer
-$config->sidebar1 = ''; #goes inside left side of page
-$config->sidebar2 = ''; #goes inside right side of page
-$config->nav1["page.php"] = "New Page!"; #add a new page to end of nav1 (viewable this page only)!!
-$config->nav1 = array("page.php"=>"New Page!") + $config->nav1; #add a new page to beginning of nav1 (viewable this page only)!!
-*/
 
 //END CONFIG AREA ----------------------------------------------------------
 
@@ -55,7 +41,7 @@ switch ($myAction)
 }
 
 function showForm()
-{# shows form so user can enter their name.  Initial scenario
+{# shows form so user can enter their order.  Initial scenario
 	global $config;
     get_header(); #defaults to header_inc.php	
 	
@@ -123,9 +109,12 @@ function showData()
     
     //dumpDie($_POST);
      get_header(); #defaults to footer_inc.php
-  	 $subtotal = 0;
+  	
+	//instantiate variables for use 
+	 $subtotal = 0;
 	 $itemSubtotal = 0;
-     $count = count($_POST['extra_']);   
+
+	$count = count($_POST['extra_']);   
 
 	echo '<h3 align="center">' . smartTitle() . '</h3>';
 	
